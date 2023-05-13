@@ -2,72 +2,48 @@ import {FlatList, Image, StyleSheet, Text, TouchableOpacity, View} from "react-n
 import {images} from "../constans";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useState} from "react";
+import axios from "axios";
 
 function itemPost(props) {
 
-    const [posts, setPosts] = useState([
-        {
-            userName: 'Phạm Thanh Trường',
-            address: 'Hòa Minh, Liên Chiểu, TP Đà Nẵng',
-            view: 100,
-            price: 2000000,
-            area: 20,
-            image: images.posts
-        },
-        {
-            userName: 'Phạm Thanh Trường',
-            address: 'Nguyễn Huy Tưởng, Hòa Minh, Liên Chiểu, TP Đà Nẵng',
-            view: 120,
-            price: 3000000,
-            area: 30,
-            image: images.posts
-        },
-        {
-            userName: 'Phạm Thanh Trường',
-            address: '123 Nguyễn Huy Tưởng, Hòa Minh, Liên Chiểu, TP Đà Nẵng',
-            view: 130,
-            price: 2300000,
-            area: 23,
-            image: images.posts
-        },
-        {
-            userName: 'Phạm Thanh Trường',
-            address: 'Hòa Minh, Liên Chiểu, TP Đà Nẵng',
-            view: 140,
-            price: 2000000,
-            area: 20,
-            image: images.posts
-        },
-        {
-            userName: 'Phạm Thanh Trường',
-            address: 'Hòa Minh, Liên Chiểu, TP Đà Nẵng',
-            view: 100,
-            price: 2000000,
-            area: 20,
-            image: images.posts
-        },
-        {
-            userName: 'Phạm Thanh Trường',
-            address: 'Hòa Minh, Liên Chiểu, TP Đà Nẵng',
-            view: 150,
-            price: 2000000,
-            area: 20,
-            image: images.posts
-        }
-    ])
+    const [posts, setPosts] = useState(null)
+
+    const host = 'http://192.168.1.5:2023';
+    const api = '/api';
+    const getPosts = '/posts';
+
+    axios.get(host + api + getPosts)
+        .then((response) => {
+            setPosts(response.data.posts)
+        }).catch(error => {
+        console.log(error)
+    })
+    if (!posts) {
+        return <View style={{
+            flex: 1, backgroundColor: 'while',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Text style={{
+                fontWeight: 'bold',
+                fontSize: 20
+            }}>Loading...</Text>
+        </View>
+    }
 
     return (
         <View style={{
             flex: 1, backgroundColor: 'while'
         }}>
             <FlatList style={{flex: 1}}
-                      keyExtractor={item => item.name}
+                      keyExtractor={item => item.id}
                       horizontal={false}
                       data={posts} renderItem={({item}) => {
+                const convertJsonImages = JSON.parse(item.image);
                 return (
                     <TouchableOpacity
                         onPress={() => {
-                            alert('vao')
+                            alert(`${host}/images/posts/${convertJsonImages[0]}`)
                         }}
                     >
                         <View style={{
@@ -84,7 +60,7 @@ function itemPost(props) {
                                 resizeMode: 'cover',
                                 borderRadius: 15,
                                 marginBottom: 5,
-                            }} source={images.posts}/>
+                            }} source={{uri: `${host}/images/posts/${convertJsonImages[0]}`}}/>
                             <View style={{
                                 flex: 30,
                                 flexDirection: 'row',
@@ -99,8 +75,7 @@ function itemPost(props) {
                                         fontSize: 15,
                                         color: 'black',
                                         fontWeight: 'bold'
-                                    }}>Phòng
-                                        trọ {((item.userName).length > 20) ? (((item.userName).substring(0, 20 - 3)) + '...') : item.userName}</Text>
+                                    }}>{((item.category).length > 20) ? (((item.category).substring(0, 20 - 3)) + '...') : item.category}</Text>
                                     <View>
                                         <Text style={{
                                             fontSize: 13,
@@ -123,17 +98,17 @@ function itemPost(props) {
                                         />
                                         <Text style={styles.textPost}>{item.view}</Text>
                                     </View>
-                                    <View style={{
-                                        flexDirection: 'row',
-                                        justifyContent: 'space-between'
-                                    }}>
-                                        <Icon name={'money'}
-                                              color={'gray'}
-                                              size={18}
-                                        />
-                                        <Text
-                                            style={styles.textPost}>{((item.price).length > 7) ? (((item.price).substring(0, 7 - 3)) + '...') : item.price} đ</Text>
-                                    </View>
+                                    {/*<View style={{*/}
+                                    {/*    flexDirection: 'row',*/}
+                                    {/*    justifyContent: 'space-between'*/}
+                                    {/*}}>*/}
+                                    {/*    <Icon name={'money'}*/}
+                                    {/*          color={'gray'}*/}
+                                    {/*          size={18}*/}
+                                    {/*    />*/}
+                                    {/*    <Text*/}
+                                    {/*        style={styles.textPost}>{((item.price).length > 7) ? (((item.price).substring(0, 7 - 3)) + '...') : item.price} đ</Text>*/}
+                                    {/*</View>*/}
                                     <View style={{
                                         flexDirection: 'row',
                                         justifyContent: 'space-between'
