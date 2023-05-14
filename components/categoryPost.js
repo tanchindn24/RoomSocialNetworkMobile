@@ -1,24 +1,35 @@
 import {FlatList, Image, Text, TouchableOpacity, View} from "react-native";
 import {images} from "../constans/index";
 import {useState} from "react";
+import axios from "axios";
 
 function categoryPost() {
 
-    const [categories, setCategories] = useState([{
-        name: 'Cho Thuê', image: images.categoryPost,
-    }, {
-        name: 'Ở Ghép', image: images.categoryPost,
-    }, {
-        name: 'Nhà Nguyên Căn', image: images.categoryPost,
-    }, {
-        name: 'Chung Cư', image: images.categoryPost,
-    }, {
-        name: 'Cho thuê căn hộ', image: images.categoryPost,
-    }, {
-        name: 'Cho thuê căn hộ mini', image: images.categoryPost,
-    }, {
-        name: 'Cho thuê căn hộ dịch vụ', image: images.categoryPost,
-    }])
+    const [categories, setCategories] = useState(null)
+
+    const host = 'http://192.168.1.5:2023';
+    const api = '/api';
+    const getCategory = '/category';
+
+    axios.get(host + api + getCategory)
+        .then((response) => {
+            setCategories(response.data.category)
+        }).catch(error => {
+        console.log(error)
+    })
+
+    if (!categories) {
+        return <View style={{
+            flex: 1, backgroundColor: 'while',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }}>
+            <Text style={{
+                fontWeight: 'bold',
+                fontSize: 20
+            }}>Loading...</Text>
+        </View>
+    }
 
     return (<View style={{
         flex: 1, backgroundColor: 'while'
@@ -44,7 +55,7 @@ function categoryPost() {
                           }}>
                               <Image style={{
                                   width: 60, height: 60, resizeMode: 'cover', borderRadius: 20, margin: 5
-                              }} source={item.image}/>
+                              }} source={images.categoryPost}/>
                               <Text style={{
                                   fontSize: 15, textAlign: 'center',
                               }}>
