@@ -1,6 +1,6 @@
 import {FlatList, Image, Text, TouchableOpacity, View} from "react-native";
 import {images} from "../constans/index";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {getApi} from "../routes/index";
 
@@ -12,12 +12,15 @@ function categoryPost() {
     const api = '/api';
     const getCategory = '/category';
 
-    axios.get(host + api + getCategory)
-        .then((response) => {
-            setCategories(response.data.category)
-        }).catch(error => {
-        console.log(error)
-    })
+    useEffect(() => {
+        axios.get(host + api + getCategory)
+            .then((response) => {
+                setCategories(response.data.category)
+            }).catch(error => {
+            console.log(error)
+        });
+    }, []);
+
 
     if (!categories) {
         return <View style={{

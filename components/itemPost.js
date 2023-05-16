@@ -1,7 +1,7 @@
 import {FlatList, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import {images} from "../constans";
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import axios from "axios";
 import {getApi} from "../routes/index";
 
@@ -72,12 +72,15 @@ function itemPost(props) {
     const api = '/api';
     const getPosts = '/posts';
 
-    axios.get(host + api + getPosts)
-        .then((response) => {
-            setPosts(response.data.posts)
-        }).catch(error => {
-        console.log(error)
-    })
+    useEffect(() => {
+        axios.get(host + api + getPosts)
+            .then((response) => {
+                setPosts(response.data.posts)
+            }).catch(error => {
+            console.log(error)
+        });
+    }, []);
+
     if (!posts) {
         return <View style={{
             flex: 1, backgroundColor: 'while',
@@ -103,7 +106,7 @@ function itemPost(props) {
                 return (
                     <TouchableOpacity
                         onPress={() => {
-                            navigate('DetailPost', { item: item })
+                            navigate('DetailPost', {item: item})
                         }}
                     >
                         <View style={{
