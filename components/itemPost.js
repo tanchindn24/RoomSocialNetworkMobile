@@ -3,6 +3,7 @@ import {images} from "../constans";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {useState} from "react";
 import axios from "axios";
+import {getApi} from "../routes/index";
 
 function itemPost(props) {
 
@@ -62,7 +63,7 @@ function itemPost(props) {
 
     const [posts, setPosts] = useState(null)
 
-    const host = 'http://192.168.1.5:2023';
+    const host = `${getApi.host}:${getApi.port}`;
     const api = '/api';
     const getPosts = '/posts';
 

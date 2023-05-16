@@ -2,12 +2,13 @@ import {FlatList, Image, Text, TouchableOpacity, View} from "react-native";
 import {images} from "../constans/index";
 import {useState} from "react";
 import axios from "axios";
+import {getApi} from "../routes/index";
 
 function categoryPost() {
 
     const [categories, setCategories] = useState(null)
 
-    const host = 'http://192.168.1.5:2023';
+    const host = `${getApi.host}:${getApi.port}`;
     const api = '/api';
     const getCategory = '/category';
 
