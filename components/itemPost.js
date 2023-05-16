@@ -7,6 +7,11 @@ import {getApi} from "../routes/index";
 
 function itemPost(props) {
 
+    // navigation
+    const {navigation,} = props
+    // functions of navigate to/back
+    const {navigate,} = navigation
+
     function formatTime(time) {
         switch (typeof time) {
             case 'number':
@@ -98,7 +103,7 @@ function itemPost(props) {
                 return (
                     <TouchableOpacity
                         onPress={() => {
-                            alert(`${host}/images/posts/${convertJsonImages[0]}`)
+                            navigate('DetailPost', { item: item })
                         }}
                     >
                         <View style={{

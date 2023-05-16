@@ -161,7 +161,7 @@ function Home(props) {
                            }}>See all</Text>
                        </TouchableOpacity>
                     </View>
-                    <ItemPost/>
+                    <ItemPost navigation={navigation}/>
                 </View>
             </View>
         </View>

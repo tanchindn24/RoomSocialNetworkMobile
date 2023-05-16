@@ -2,7 +2,13 @@ import {Text, View} from "react-native";
 import {colors} from "../constans";
 import ItemPost from "../components/itemPost";
 
-function ListPosts() {
+function ListPosts(props) {
+
+    // navigation
+    const {navigation,} = props
+    // functions of navigate to/back
+    const {navigate,} = navigation
+
     return (
         <View style={{
             flex: 1,
@@ -28,7 +34,7 @@ function ListPosts() {
             <View style={{
                 flex: 90,
             }}>
-                <ItemPost/>
+                <ItemPost navigation={navigation} />
             </View>
         </View>
     )
