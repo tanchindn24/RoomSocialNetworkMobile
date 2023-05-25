@@ -9,33 +9,21 @@ function Home(props) {
     const {navigation} = props
     const {navigate} = navigation
 
-    return (
-        <View style={{
-            flex: 1,
-            backgroundColor: 'white'
+    return (<View style={{
+            flex: 1, backgroundColor: 'white'
         }}>
             <View style={{
-                flex: 10,
-                marginHorizontal: 10,
-                marginTop: 20,
+                flex: 10, marginHorizontal: 10, marginTop: 20,
             }}>
                 <Text style={{
-                    color: colors.primaryHome,
-                    fontSize: 20,
-                    fontWeight: 'bold',
-                    marginBottom: 3
+                    color: colors.primaryHome, fontSize: 20, fontWeight: 'bold', marginBottom: 3
                 }}>MotelRoom Social</Text>
                 <Text style={{
-                    color: 'gray',
-                    fontSize: 15,
-                    fontWeight: 'normal'
+                    color: 'gray', fontSize: 15, fontWeight: 'normal'
                 }}>List Post</Text>
             </View>
             <View style={{
-                flex: 10,
-                flexDirection: 'row',
-                marginHorizontal: 10,
-                marginVertical: 20,
+                flex: 10, flexDirection: 'row', marginHorizontal: 10, marginVertical: 20,
             }}>
                 <TouchableOpacity style={{
                     flex: 50,
@@ -46,32 +34,26 @@ function Home(props) {
                     flexDirection: 'row',
                     justifyContent: 'space-between',
                     alignItems: 'center',
-                }}>
+                }}
+                                  onPress={() => {
+                                      navigate('SearchKeyword')
+                                  }}>
                     <View style={{
-                        alignItems: 'center',
-                        marginLeft: 15,
+                        alignItems: 'center', marginLeft: 15,
                     }}>
                         <Text style={{
-                            fontSize: 17,
-                            fontWeight: 'bold',
-                            color: colors.primaryHome,
-                            textTransform: 'uppercase'
+                            fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
                         }}>
                             Tìm theo
                         </Text>
                         <Text style={{
-                            fontSize: 17,
-                            fontWeight: 'bold',
-                            color: colors.primaryHome,
-                            textTransform: 'uppercase'
+                            fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
                         }}>
                             từ khóa
                         </Text>
                     </View>
                     <Image style={{
-                        width: 70,
-                        height: 70,
-                        marginRight: 1,
+                        width: 70, height: 70, marginRight: 1,
                     }}
                            source={images.buttonNavLeft}/>
                 </TouchableOpacity>
@@ -86,30 +68,21 @@ function Home(props) {
                     alignItems: 'center',
                 }}>
                     <View style={{
-                        alignItems: 'center',
-                        marginLeft: 15,
+                        alignItems: 'center', marginLeft: 15,
                     }}>
                         <Text style={{
-                            fontSize: 17,
-                            fontWeight: 'bold',
-                            color: colors.primaryHome,
-                            textTransform: 'uppercase'
+                            fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
                         }}>
                             Tìm theo
                         </Text>
                         <Text style={{
-                            fontSize: 17,
-                            fontWeight: 'bold',
-                            color: colors.primaryHome,
-                            textTransform: 'uppercase'
+                            fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
                         }}>
                             khu vực
                         </Text>
                     </View>
                     <Image style={{
-                        width: 70,
-                        height: 70,
-                        marginRight: 5,
+                        width: 70, height: 70, marginRight: 5,
                     }}
                            source={images.buttonNavRight}/>
                 </TouchableOpacity>
@@ -120,51 +93,39 @@ function Home(props) {
                 <SlideHome/>
             </View>
             <View style={{
-                flex: 50,
-                marginHorizontal: 10,
+                flex: 50, marginHorizontal: 10,
             }}>
                 <View style={{
-                    flex: 15,
-                    flexDirection: 'column',
+                    flex: 15, flexDirection: 'column',
                 }}>
                     <Text style={{
-                        fontSize: 20,
-                        fontWeight: 'bold',
-                        color: colors.primaryHome
+                        fontSize: 20, fontWeight: 'bold', color: colors.primaryHome
                     }}>Loại phòng trọ</Text>
                     <CategoryPost/>
                 </View>
                 <View style={{
-                    flex: 35,
-                    flexDirection: 'column'
+                    flex: 35, flexDirection: 'column'
                 }}>
                     <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        marginBottom: 10,
+                        flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10,
                     }}>
                         <Text style={{
-                            fontSize: 20,
-                            fontWeight: 'bold',
-                            color: colors.primaryHome
+                            fontSize: 20, fontWeight: 'bold', color: colors.primaryHome
                         }}>New Post</Text>
-                       <TouchableOpacity
-                           onPress={() => {
-                               navigate('ListPosts')
-                           }}
-                       >
-                           <Text style={{
-                               fontSize: 15,
-                               fontWeight: 'normal',
-                               color: colors.primary
-                           }}>See all</Text>
-                       </TouchableOpacity>
+                        <TouchableOpacity
+                            onPress={() => {
+                                navigate('ListPosts')
+                            }}
+                        >
+                            <Text style={{
+                                fontSize: 15, fontWeight: 'normal', color: colors.primary
+                            }}>See all</Text>
+                        </TouchableOpacity>
                     </View>
                     <ItemPost navigation={navigation}/>
                 </View>
             </View>
-        </View>
-    )
+        </View>)
 }
+
 export default Home
