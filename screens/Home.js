@@ -3,6 +3,7 @@ import {colors, images} from "../constans/index";
 import SlideHome from "../components/slideHome";
 import CategoryPost from "../components/categoryPost";
 import ItemPost from "../components/itemPost";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 function Home(props) {
 
@@ -10,10 +11,13 @@ function Home(props) {
     const {navigate} = navigation
 
     return (<View style={{
-            flex: 1, backgroundColor: 'white'
+        flex: 1, backgroundColor: 'white'
+    }}>
+        <View style={{
+            flex: 10, marginHorizontal: 10, marginTop: 20, flexDirection: 'row', justifyContent: 'space-between'
         }}>
             <View style={{
-                flex: 10, marginHorizontal: 10, marginTop: 20,
+                flexDirection: 'column'
             }}>
                 <Text style={{
                     color: colors.primaryHome, fontSize: 20, fontWeight: 'bold', marginBottom: 3
@@ -22,110 +26,120 @@ function Home(props) {
                     color: 'gray', fontSize: 15, fontWeight: 'normal'
                 }}>List Post</Text>
             </View>
-            <View style={{
-                flex: 10, flexDirection: 'row', marginHorizontal: 10, marginVertical: 20,
-            }}>
-                <TouchableOpacity style={{
-                    flex: 50,
-                    backgroundColor: '#56E39F',
-                    borderRadius: 25,
-                    borderColor: '#56E39F',
-                    marginRight: 5,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                }}
-                                  onPress={() => {
-                                      navigate('SearchKeyword')
-                                  }}>
-                    <View style={{
-                        alignItems: 'center', marginLeft: 15,
-                    }}>
-                        <Text style={{
-                            fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
-                        }}>
-                            Tìm theo
-                        </Text>
-                        <Text style={{
-                            fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
-                        }}>
-                            từ khóa
-                        </Text>
-                    </View>
-                    <Image style={{
-                        width: 70, height: 70, marginRight: 1,
-                    }}
-                           source={images.buttonNavLeft}/>
-                </TouchableOpacity>
-                <TouchableOpacity style={{
-                    flex: 50,
-                    backgroundColor: '#56E39F',
-                    borderRadius: 25,
-                    borderColor: '#56E39F',
-                    marginLeft: 5,
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
+            <View>
+                <TouchableOpacity onPress={() => {
+                    navigate('SignIn')
                 }}>
-                    <View style={{
-                        alignItems: 'center', marginLeft: 15,
-                    }}>
-                        <Text style={{
-                            fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
-                        }}>
-                            Tìm theo
-                        </Text>
-                        <Text style={{
-                            fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
-                        }}>
-                            khu vực
-                        </Text>
-                    </View>
-                    <Image style={{
-                        width: 70, height: 70, marginRight: 5,
-                    }}
-                           source={images.buttonNavRight}/>
+                    <Icon name={'user-circle'}
+                          size={30}
+                          color={'gray'}/>
                 </TouchableOpacity>
             </View>
-            <View style={{
-                flex: 30,
-            }}>
-                <SlideHome/>
-            </View>
-            <View style={{
-                flex: 50, marginHorizontal: 10,
+        </View>
+        <View style={{
+            flex: 10, flexDirection: 'row', marginHorizontal: 10, marginVertical: 20,
+        }}>
+            <TouchableOpacity style={{
+                flex: 50,
+                backgroundColor: '#56E39F',
+                borderRadius: 25,
+                borderColor: '#56E39F',
+                marginRight: 5,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+            }}
+                              onPress={() => {
+                                  navigate('SearchKeyword')
+                              }}>
+                <View style={{
+                    alignItems: 'center', marginLeft: 15,
+                }}>
+                    <Text style={{
+                        fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
+                    }}>
+                        Tìm theo
+                    </Text>
+                    <Text style={{
+                        fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
+                    }}>
+                        từ khóa
+                    </Text>
+                </View>
+                <Image style={{
+                    width: 70, height: 70, marginRight: 1,
+                }}
+                       source={images.buttonNavLeft}/>
+            </TouchableOpacity>
+            <TouchableOpacity style={{
+                flex: 50,
+                backgroundColor: '#56E39F',
+                borderRadius: 25,
+                borderColor: '#56E39F',
+                marginLeft: 5,
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
             }}>
                 <View style={{
-                    flex: 15, flexDirection: 'column',
+                    alignItems: 'center', marginLeft: 15,
+                }}>
+                    <Text style={{
+                        fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
+                    }}>
+                        Tìm theo
+                    </Text>
+                    <Text style={{
+                        fontSize: 17, fontWeight: 'bold', color: colors.primaryHome, textTransform: 'uppercase'
+                    }}>
+                        khu vực
+                    </Text>
+                </View>
+                <Image style={{
+                    width: 70, height: 70, marginRight: 5,
+                }}
+                       source={images.buttonNavRight}/>
+            </TouchableOpacity>
+        </View>
+        <View style={{
+            flex: 30,
+        }}>
+            <SlideHome/>
+        </View>
+        <View style={{
+            flex: 50, marginHorizontal: 10,
+        }}>
+            <View style={{
+                flex: 15, flexDirection: 'column',
+            }}>
+                <Text style={{
+                    fontSize: 20, fontWeight: 'bold', color: colors.primaryHome
+                }}>Loại phòng trọ</Text>
+                <CategoryPost/>
+            </View>
+            <View style={{
+                flex: 35, flexDirection: 'column'
+            }}>
+                <View style={{
+                    flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10,
                 }}>
                     <Text style={{
                         fontSize: 20, fontWeight: 'bold', color: colors.primaryHome
-                    }}>Loại phòng trọ</Text>
-                    <CategoryPost/>
-                </View>
-                <View style={{
-                    flex: 35, flexDirection: 'column'
-                }}>
-                    <View style={{
-                        flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10,
-                    }}>
+                    }}>New Post</Text>
+                    <TouchableOpacity
+                        onPress={() => {
+                            navigate('ListPosts')
+                        }}
+                    >
                         <Text style={{
-                            fontSize: 20, fontWeight: 'bold', color: colors.primaryHome
-                        }}>New Post</Text>
-                        <TouchableOpacity
-                            onPress={() => {
-                                navigate('ListPosts')
-                            }}
-                        >
-                            <Text style={{
-                                fontSize: 15, fontWeight: 'normal', color: colors.primary
-                            }}>See all</Text>
-                        </TouchableOpacity>
-                    </View>
-                    <ItemPost navigation={navigation}/>
+                            fontSize: 15, fontWeight: 'normal', color: colors.primary
+                        }}>See all</Text>
+                    </TouchableOpacity>
                 </View>
+                <ItemPost navigation={navigation}/>
             </View>
-        </View>)
+        </View>
+    </View>)
 }
 
 export default Home

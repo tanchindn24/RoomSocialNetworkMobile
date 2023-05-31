@@ -291,7 +291,7 @@ function SearchKeyword(props) {
                         })}
                     </View>
                 </View>) : (<View style={{width: '100%', height: '100%', alignItems: 'center'}}>
-                    <Text style={{marginTop: 50, fontWeight: 'bold', color: 'black', fontSize: 50}}>No Result</Text>
+                    <Image source={images.houseQuestionMark} style={{marginTop: 100, width: 164, height: 164}}/>
                 </View>)}
             </View>
         </ScrollView>
