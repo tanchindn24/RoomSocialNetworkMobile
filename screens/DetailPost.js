@@ -1,4 +1,4 @@
-import {Image, Text, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, Image, Text, TouchableOpacity, View} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {colors, images} from "../constans/index";
 import {getApi} from "../routes";
@@ -43,10 +43,7 @@ function DetailPost(props) {
             justifyContent: 'center',
             alignItems: 'center'
         }}>
-            <Text style={{
-                fontWeight: 'bold',
-                fontSize: 20
-            }}>Loading...</Text>
+            <ActivityIndicator size={"large"}/>
         </View>
     }
     if (isDetailPostLoaded) {

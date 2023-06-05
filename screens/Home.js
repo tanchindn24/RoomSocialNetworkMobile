@@ -4,11 +4,37 @@ import SlideHome from "../components/slideHome";
 import CategoryPost from "../components/categoryPost";
 import ItemPost from "../components/itemPost";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useEffect, useState} from "react";
 
 function Home(props) {
 
     const {navigation} = props
     const {navigate} = navigation
+
+    const [existenceToken, setExistenceToken] = useState(false);
+
+    const checkExistenceToken = async () => {
+        try {
+            const userToken = await AsyncStorage.getItem('userToken')
+            console.log(userToken)
+            if (userToken) {
+                setExistenceToken(true)
+                console.log('Token exists')
+            } else {
+                setExistenceToken(false)
+                console.log('Token expires')
+            }
+        } catch (error) {
+            console.error('Error check existence token: ', error)
+        }
+    }
+
+    useEffect(() => {
+        checkExistenceToken().then((result) => {
+            console.log(result)
+        });
+    }, []);
 
     return (<View style={{
         flex: 1, backgroundColor: 'white'
@@ -27,13 +53,23 @@ function Home(props) {
                 }}>List Post</Text>
             </View>
             <View>
-                <TouchableOpacity onPress={() => {
-                    navigate('SignIn')
-                }}>
-                    <Icon name={'user-circle'}
-                          size={30}
-                          color={'gray'}/>
-                </TouchableOpacity>
+                {existenceToken ? (
+                    <TouchableOpacity onPress={() => {
+                        navigate('Profile')
+                    }}>
+                        <Icon name={'user-circle'}
+                              size={30}
+                              color={'gray'}/>
+                    </TouchableOpacity>
+                ) : (
+                    <TouchableOpacity onPress={() => {
+                        navigate('SignIn')
+                    }}>
+                        <Icon name={'user-circle'}
+                              size={30}
+                              color={'gray'}/>
+                    </TouchableOpacity>
+                )}
             </View>
         </View>
         <View style={{

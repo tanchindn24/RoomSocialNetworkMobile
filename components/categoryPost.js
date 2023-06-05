@@ -1,4 +1,4 @@
-import {FlatList, Image, Text, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, FlatList, Image, Text, TouchableOpacity, View} from "react-native";
 import {images} from "../constans/index";
 import {useEffect, useState} from "react";
 import axios from "axios";
@@ -28,10 +28,7 @@ function categoryPost() {
             justifyContent: 'center',
             alignItems: 'center'
         }}>
-            <Text style={{
-                fontWeight: 'bold',
-                fontSize: 20
-            }}>Loading...</Text>
+            <ActivityIndicator size={"large"}/>
         </View>
     }
 

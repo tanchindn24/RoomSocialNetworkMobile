@@ -1,7 +1,10 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
-import React from "react";
+import React, {useEffect} from "react";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {colors, images} from "../constans/index";
+import {getApi} from "../routes";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from "axios";
 
 function Welcome(props) {
 
@@ -9,6 +12,44 @@ function Welcome(props) {
     const {navigation,} = props
     // functions of navigate to/back
     const {navigate,} = navigation
+
+    const host = `${getApi.host}:${getApi.port}`;
+    const api = '/api';
+    const checkStatusToken = '/check-token-status';
+
+    const checkTokenStatus = async () => {
+        try {
+            const userToken = await AsyncStorage.getItem('userToken')
+            console.log(userToken)
+            if (!userToken) {
+                console.log('Token does not exist')
+            }
+
+            const response = await axios.get(host + api + checkStatusToken, {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            })
+
+            const { statusToken } = response.data;
+
+            if (statusToken === false) {
+                console.log('Token expires')
+                await AsyncStorage.removeItem('userToken');
+            } else if (statusToken === true) {
+                console.log('Token true')
+            }
+        } catch (error) {
+            console.error('Error check status token: ', error)
+        }
+    }
+
+    useEffect(() => {
+        checkTokenStatus().then((result) => {
+            console.log(result)
+        });
+    }, []);
+
     return (
         <View style={{
             backgroundColor: 'white',

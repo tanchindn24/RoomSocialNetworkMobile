@@ -1,4 +1,13 @@
-import {Image, SafeAreaView, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {
+    ActivityIndicator,
+    Image,
+    SafeAreaView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 import {colors, images} from "../constans/index";
 import InputField from "../components/inputField";
 import {useState} from "react";
@@ -17,8 +26,12 @@ function SignIn(props) {
 
     const [emailRegister, setEmailRegister] = useState(null);
     const [passwordRegister, setPasswordRegister] = useState(null);
+    const [userToken, setUserToken] = useState(null);
+    const [userInfo, setUserInfo] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const loginUser = () => {
+        setIsLoading(true)
         const loginData = {
             email: emailRegister,
             password: passwordRegister,
@@ -26,11 +39,14 @@ function SignIn(props) {
         axios
             .post(`${host}${api}${loginEndpoint}`, loginData)
             .then(response => {
-                const token = response.data.data.token;
-                AsyncStorage.setItem('token', token)
-                    .then(() => {
-                        navigate('Profile', { token: token })
-                    })
+                let userInfo = response.data
+                setUserInfo(userInfo)
+                setUserToken(userInfo.data.token)
+
+                AsyncStorage.setItem('userInfo', JSON.stringify(userInfo))
+                AsyncStorage.setItem('userToken', userInfo.data.token)
+                setIsLoading(false)
+                navigate('Home')
             })
             .catch(error => {
                 console.error(error);
@@ -38,7 +54,8 @@ function SignIn(props) {
     }
 
     return (<SafeAreaView style={{
-        backgroundColor: 'white', flex: 1, justifyContent: 'center'
+        backgroundColor: 'white', flex: 1, justifyContent: 'center',
+        position: 'relative'
     }}>
         <View style={{paddingHorizontal: 25}}>
             <View style={{alignItems: 'center'}}>
@@ -96,7 +113,18 @@ function SignIn(props) {
                 </TouchableOpacity>
             </View>
         </View>
+        {isLoading === true ? (<View style={styles.overlay}>
+            <ActivityIndicator size={"large"}/>
+        </View>) : null }
     </SafeAreaView>)
 }
+const styles = StyleSheet.create({
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        opacity: 0.8,
+        justifyContent: 'center',
+    },
+})
 
 export default SignIn

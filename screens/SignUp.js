@@ -1,4 +1,15 @@
-import {Alert, Image, SafeAreaView, ScrollView, Text, TextInput, TouchableOpacity, View} from "react-native";
+import {
+    ActivityIndicator,
+    Alert,
+    Image,
+    SafeAreaView,
+    ScrollView,
+    StyleSheet,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View
+} from "react-native";
 import {colors, images} from "../constans/index";
 import InputField from "../components/inputField";
 import {useState} from "react";
@@ -14,12 +25,14 @@ function SignUp(props) {
     const [emailRegister, setEmailRegister] = useState(null);
     const [passwordRegister, setPasswordRegister] = useState(null);
     const [confirmPasswordRegister, setConfirmPasswordRegister] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const host = `${getApi.host}:${getApi.port}`;
     const api = '/api';
     const registerEndpoint = '/register';
 
     const registerUser = () => {
+        setIsLoading(true)
         if (passwordRegister !== confirmPasswordRegister) {
             Alert.alert('Error', 'Password and Confirm Password do not match');
         }
@@ -40,6 +53,8 @@ function SignUp(props) {
                 setEmailRegister(null);
                 setPasswordRegister(null);
                 setConfirmPasswordRegister(null);
+                setIsLoading(false)
+                navigate('SignIn')
             })
             .catch(error => {
                 // Handle error response
@@ -49,7 +64,8 @@ function SignUp(props) {
     }
 
     return (<SafeAreaView style={{
-        backgroundColor: 'white', flex: 1, justifyContent: 'center'
+        backgroundColor: 'white', flex: 1, justifyContent: 'center',
+        position: 'relative'
     }}>
         <ScrollView style={{paddingHorizontal: 25}}>
             <View style={{alignItems: 'center'}}>
@@ -109,7 +125,17 @@ function SignUp(props) {
                 </TouchableOpacity>
             </View>
         </ScrollView>
+        {isLoading === true ? (<View style={styles.overlay}>
+            <ActivityIndicator size={"large"}/>
+        </View>) : null }
     </SafeAreaView>)
 }
-
+const styles = StyleSheet.create({
+    overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        opacity: 0.8,
+        justifyContent: 'center',
+    },
+})
 export default SignUp
