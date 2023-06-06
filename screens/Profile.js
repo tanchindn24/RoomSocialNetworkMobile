@@ -102,7 +102,7 @@ function Profile(props) {
             } else if (success === true) {
                 await AsyncStorage.removeItem('userToken')
                 console.log('Logout success')
-                navigate('Welcome')
+                navigation.reset({ index: 0, routes: [{ name: 'Welcome' }] })
             }
         } catch (error) {
             console.error('Error logout: ', error)
@@ -131,7 +131,9 @@ function Profile(props) {
                     <TouchableOpacity style={styles.userBtn}>
                         <Text style={styles.userBtnTxt}>Change</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.userBtn}>
+                    <TouchableOpacity style={styles.userBtn}
+                                      onPress={()=>navigate('CategoryPost')}
+                    >
                         <Text style={styles.userBtnTxt}>Post</Text>
                     </TouchableOpacity>
                 </View>

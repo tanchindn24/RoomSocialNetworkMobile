@@ -46,7 +46,7 @@ function SignIn(props) {
                 AsyncStorage.setItem('userInfo', JSON.stringify(userInfo))
                 AsyncStorage.setItem('userToken', userInfo.data.token)
                 setIsLoading(false)
-                navigate('Home')
+                navigation.reset({ index: 0, routes: [{ name: 'Home' }] })
             })
             .catch(error => {
                 console.error(error);
