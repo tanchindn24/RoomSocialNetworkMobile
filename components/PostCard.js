@@ -13,7 +13,7 @@ function PostCard({item}) {
     return (
         <View key={item.id} style={styles.card}>
             <View style={styles.UserInfo}>
-                <Image source={{uri: `${host}/images/avatar/${item.user_avatar}`}}
+                <Image source={{uri: `${host}/upload/avatar/${item.user_avatar}`}}
                        style={styles.UserImg}
                 />
                 <View style={styles.UserInfoText}>
@@ -24,23 +24,23 @@ function PostCard({item}) {
                 </View>
             </View>
             <Text style={styles.PostText}>{((item.title).length > 50) ? (((item.title).substring(0, 50 - 3)) + '...') : item.title}</Text>
-            <Image source={{uri: `${host}/images/posts/${convertJsonImages[0]}`}}
+            <Image source={{uri: `${host}/upload/posts/images/${convertJsonImages[0]}`}}
                    style={styles.PostImg}
             />
             <View style={styles.InteractionWrapper}>
                 <TouchableOpacity style={styles.Interaction}>
                     <Icon name={'eye-slash'} size={25} color={colors.Warning}/>
-                    <Text style={styles.InteractionText}>Hide</Text>
+                    <Text style={styles.InteractionText}>Ẩn tin</Text>
                     {/*<Icon name={'eye'} size={25} color={colors.primary}/>*/}
                     {/*<Text style={styles.InteractionText}>Show</Text>*/}
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Interaction}>
                     <Icon name={'edit'} size={25} color={colors.Info}/>
-                    <Text style={styles.InteractionText}>Edit</Text>
+                    <Text style={styles.InteractionText}>Thay đổi</Text>
                 </TouchableOpacity>
                 <TouchableOpacity style={styles.Interaction}>
                     <Icon name={'trash-o'} size={25} color={colors.danger}/>
-                    <Text style={styles.InteractionText}>Delete</Text>
+                    <Text style={styles.InteractionText}>Xóa</Text>
                 </TouchableOpacity>
             </View>
         </View>

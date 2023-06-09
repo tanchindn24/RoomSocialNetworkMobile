@@ -1,4 +1,4 @@
-import {Image, Text, TouchableOpacity, View} from "react-native";
+import {Alert, Image, Text, TouchableOpacity, View} from "react-native";
 import {colors, images} from "../constans/index";
 import SlideHome from "../components/slideHome";
 import CategoryPost from "../components/categoryPost";
@@ -23,6 +23,7 @@ function Home(props) {
                 console.log('Token exists')
             } else {
                 setExistenceToken(false)
+                Alert.alert('Thông báo!', 'Token hết hạn')
                 console.log('Token expires')
             }
         } catch (error) {

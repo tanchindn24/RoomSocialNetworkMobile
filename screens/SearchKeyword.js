@@ -16,6 +16,7 @@ import {useEffect, useRef, useState} from "react";
 import {images} from "../constans";
 import axios from "axios";
 import {getApi} from "../routes/index";
+import {numberFormat} from "../utils/utils";
 
 const WIDTH = Dimensions.get('window').width;
 const HEIGHT = Dimensions.get('window').height;
@@ -278,12 +279,13 @@ function SearchKeyword(props) {
                                                   }}
                                 >
                                     <View style={styles.postsSearch}>
-                                        <Image source={{uri: `${host}/images/posts/${convertJsonImages[0]}`}}
+                                        <Image source={{uri: `${host}/upload/posts/images/${convertJsonImages[0]}`}}
                                                style={styles.imagePosts}/>
                                         <View style={styles.informationPosts}>
                                             <Text style={styles.userNamePosts}>{item.user}</Text>
                                             <Text style={styles.categoryPosts}>{item.category}</Text>
                                             <Text style={styles.addressPosts}>{item.address}</Text>
+                                            <Text style={styles.addressPosts}>{numberFormat(item.price)} VNĐ</Text>
                                         </View>
                                     </View>
                                 </TouchableOpacity>
@@ -356,7 +358,7 @@ const styles = StyleSheet.create({
     }, postsSearch: {
         height: 100, flexDirection: 'row', width: '90%'
     }, imagePosts: {
-        width: 60, height: 60, borderRadius: 10
+        width: 75, height: 75, borderRadius: 10
     }, informationPosts: {
         flexDirection: 'column', marginLeft: 15
     }, userNamePosts: {

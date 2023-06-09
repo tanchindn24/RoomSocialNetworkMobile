@@ -50,6 +50,7 @@ function SignIn(props) {
             })
             .catch(error => {
                 console.error(error);
+                setIsLoading(false)
             });
     }
 

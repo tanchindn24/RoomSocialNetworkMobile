@@ -1,4 +1,4 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Alert, Image, StyleSheet, Text, TouchableOpacity, View} from "react-native";
 import React, {useEffect} from "react";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {colors, images} from "../constans/index";
@@ -20,7 +20,6 @@ function Welcome(props) {
     const checkTokenStatus = async () => {
         try {
             const userToken = await AsyncStorage.getItem('userToken')
-            console.log(userToken)
             if (!userToken) {
                 console.log('Token does not exist')
             }
@@ -35,6 +34,7 @@ function Welcome(props) {
 
             if (statusToken === false) {
                 console.log('Token expires')
+                Alert.alert('Thông báo!', 'Token hết hạn')
                 await AsyncStorage.removeItem('userToken');
             } else if (statusToken === true) {
                 console.log('Token true')

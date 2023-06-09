@@ -51,3 +51,6 @@ export function formatTime(time) {
         }
     return time;
 }
+export function numberFormat(formattedNumber) {
+    return formattedNumber.toLocaleString('en-US');
+}

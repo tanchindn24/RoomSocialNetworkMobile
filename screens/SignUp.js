@@ -59,6 +59,7 @@ function SignUp(props) {
             .catch(error => {
                 // Handle error response
                 console.error(error);
+                setIsLoading(false)
                 Alert.alert('Error', 'Registration failed');
             });
     }

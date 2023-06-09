@@ -73,7 +73,7 @@ function DetailPost(props) {
                     justifyContent: 'center',
                     alignItems: 'center'
                 }}>
-                    <Image source={{uri: `${host}/images/posts/${convertJsonImages[0]}`}}
+                    <Image source={{uri: `${host}/upload/posts/images/${convertJsonImages[0]}`}}
                            style={{
                                width: 340,
                                height: 340,

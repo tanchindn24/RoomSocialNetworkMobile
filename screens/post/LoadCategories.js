@@ -37,7 +37,7 @@ function LoadCategories(props) {
                         <Icon name={'remove'} size={25}/>
                     </TouchableOpacity>
                 </View>
-                <TextTitle title={'chose category'}/>
+                <TextTitle title={'Chọn danh mục'}/>
                 {itemCategories === null ? (
                     <View style={{
                         flex: 1, backgroundColor: 'while',

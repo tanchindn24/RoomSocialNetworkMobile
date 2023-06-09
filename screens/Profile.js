@@ -118,43 +118,43 @@ function Profile(props) {
             <ScrollView style={styles.container}
                         contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
                         showsVerticalScrollIndicator={false}>
-                <Image source={{uri: `${host}/images/avatar/${userInfo && JSON.parse(userInfo)?.data?.avatar}`}}
+                <Image source={{uri: `${host}/upload/avatar/${userInfo && JSON.parse(userInfo)?.data?.avatar}`}}
                        style={styles.userImg}
                 />
                 <Text style={styles.userName}>{userInfo && JSON.parse(userInfo)?.data?.name}</Text>
                 <Text
-                    style={styles.aboutUser}>{userInfo && JSON.parse(userInfo)?.data?.roles === 2 ? "Provider" : "Seeker"}</Text>
+                    style={styles.aboutUser}>{userInfo && JSON.parse(userInfo)?.data?.roles === 2 ? "Chủ trọ" : "Khách thuê"}</Text>
                 <View style={styles.userBtnWrapper}>
                     <TouchableOpacity style={styles.userBtn}>
                         <Text style={styles.userBtnTxt}>Chat</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.userBtn}>
-                        <Text style={styles.userBtnTxt}>Change</Text>
+                        <Text style={styles.userBtnTxt}>Thay đổi thông tin</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.userBtn}
                                       onPress={()=>navigate('CategoryPost')}
                     >
-                        <Text style={styles.userBtnTxt}>Post</Text>
+                        <Text style={styles.userBtnTxt}>Đăng tin</Text>
                     </TouchableOpacity>
                 </View>
                 <TouchableOpacity style={styles.userBtnLogout}
                                   onPress={handleLogout}
                 >
-                    <Text style={styles.userBtnTxt}>Logout</Text>
+                    <Text style={styles.userBtnTxt}>Đăng xuất</Text>
                 </TouchableOpacity>
 
                 <View style={styles.userInfoWrapper}>
                     <View style={styles.userInfoItem}>
                         <Text style={styles.userInfoTitle}>{userInfo && JSON.parse(userInfo)?.data?.countPosts}</Text>
-                        <Text style={styles.userInfoSubTitle}>Posts</Text>
+                        <Text style={styles.userInfoSubTitle}>Tổng số bài tin</Text>
                     </View>
                     <View style={styles.userInfoItem}>
                         <Text style={styles.userInfoTitle}>{userInfo && JSON.parse(userInfo)?.data?.countView}</Text>
-                        <Text style={styles.userInfoSubTitle}>View</Text>
+                        <Text style={styles.userInfoSubTitle}>Lượt xem</Text>
                     </View>
                     <View style={styles.userInfoItem}>
                         <Text style={styles.userInfoTitle}>{randomNumber}</Text>
-                        <Text style={styles.userInfoSubTitle}>Seeker</Text>
+                        <Text style={styles.userInfoSubTitle}>Khách thuê</Text>
                     </View>
                 </View>
                 {

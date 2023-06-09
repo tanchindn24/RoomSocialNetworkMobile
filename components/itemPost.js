@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {getApi} from "../routes/index";
-import { formatTime } from "../utils/utils";
+import { formatTime, numberFormat } from "../utils/utils";
 function itemPost(props) {
 
     // navigation
@@ -66,7 +66,7 @@ function itemPost(props) {
                                 resizeMode: 'cover',
                                 borderRadius: 15,
                                 marginBottom: 5,
-                            }} source={{uri: `${host}/images/posts/${convertJsonImages[0]}`}}/>
+                            }} source={{uri: `${host}/upload/posts/images/${convertJsonImages[0]}`}}/>
                             <View style={{
                                 flex: 30,
                                 flexDirection: 'row',
@@ -108,11 +108,11 @@ function itemPost(props) {
                                         flexDirection: 'row',
                                         justifyContent: 'space-between'
                                     }}>
-                                        <Icon name={'square'}
+                                        <Icon name={'dollar'}
                                               color={'gray'}
                                               size={20}
                                         />
-                                        <Text style={styles.textPost}>{item.area} m2</Text>
+                                        <Text style={styles.textPost}>{numberFormat(item.price)} VNĐ</Text>
                                     </View>
                                     <View style={{
                                         flexDirection: 'row',
