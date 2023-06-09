@@ -13,6 +13,8 @@
     "@baronha/react-native-image-grid": "^0.2.7",
     "@baronha/react-native-multiple-image-picker": "^1.0.0",
     "@react-native-async-storage/async-storage": "^1.18.1",
+    "@react-native-firebase/app": "^18.0.0",
+    "@react-native-firebase/storage": "^18.0.0",
     "@react-navigation/bottom-tabs": "^6.5.7",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",

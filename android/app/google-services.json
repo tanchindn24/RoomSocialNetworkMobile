@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "61627028589",
+    "firebase_url": "https://laravel-chat-app-firebase-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "laravel-chat-app-firebase",
+    "storage_bucket": "laravel-chat-app-firebase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:61627028589:android:900b0f11a7124fe953db64",
+        "android_client_info": {
+          "package_name": "com.roomsocialnetwork"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "61627028589-ahccp4nnfm4arnaksdih2b4ni2lg0i43.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCigJKAX7hRfuQJMPX4lwDFxZSo12hG1Tw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "61627028589-ahccp4nnfm4arnaksdih2b4ni2lg0i43.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
