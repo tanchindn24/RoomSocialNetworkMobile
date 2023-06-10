@@ -72,8 +72,7 @@ function SearchKeyword(props) {
                 //const lowercaseAddress = item.address.toLowerCase();
                 const lowercaseUser = item.user.toLowerCase();
                 //const lowercaseCategory = item.category.toLowerCase();
-                const lowercasePrice = item.category.toLowerCase();
-
+                const lowercasePrice = item.price.toLocaleString('en-US').replace(/,/g, '');
                 return (
                     lowercasePrice.includes(lowercaseSearchPosts) ||
                     lowercaseUser.includes(lowercaseSearchPosts)

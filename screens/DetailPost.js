@@ -1,9 +1,10 @@
-import {ActivityIndicator, Image, Text, TouchableOpacity, View} from "react-native";
+import {ActivityIndicator, Image, ScrollView, Text, TouchableOpacity, View} from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {colors, images} from "../constans/index";
 import {getApi} from "../routes";
 import axios from "axios";
 import {useEffect, useState} from "react";
+import {numberFormat} from "../utils/utils";
 
 function DetailPost(props) {
 
@@ -172,34 +173,51 @@ function DetailPost(props) {
                             fontSize: 15,
                         }}>{((detailPost.category).length > 30) ? (((detailPost.category).substring(0, 30 - 3)) + '...') : detailPost.category}</Text>
                     </View>
+                    <View style={{
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}>
+                        <Icon name={'dollar'}
+                              size={45}
+                              color={colors.primary}
+                        />
+                        <Text style={{
+                            color: colors.primaryHome,
+                            fontWeight: 'bold',
+                            fontSize: 15,
+                        }}>{numberFormat(item.price)} VND</Text>
+                    </View>
                 </View>
                 <View style={{
                     flex: 20,
                     flexDirection: 'column'
                 }}>
-                    <Text style={{
-                        color: colors.primaryHome,
-                        fontWeight: 'bold',
-                        fontSize: 15,
-                        marginBottom: 5
-                    }}>Address</Text>
-                    <Text style={{
-                        color: colors.primary,
-                        fontWeight: 'normal',
-                        fontSize: 15,
-                    }}>{((detailPost.address).length > 50) ? (((detailPost.address).substring(0, 50 - 3)) + '...') : detailPost.address}</Text>
-                    <Text style={{
-                        color: colors.primaryHome,
-                        fontWeight: 'bold',
-                        fontSize: 25,
-                        marginTop: 10,
-                        marginBottom: 5
-                    }}>Details</Text>
-                    <Text style={{
-                        color: colors.primary,
-                        fontWeight: 'normal',
-                        fontSize: 12,
-                    }}>{((detailPost.description).length > 200) ? (((detailPost.description).substring(0, 200 - 3)) + '...') : detailPost.description}</Text>
+                    <ScrollView>
+                        <Text style={{
+                            color: colors.primaryHome,
+                            fontWeight: 'bold',
+                            fontSize: 15,
+                            marginBottom: 5
+                        }}>Address</Text>
+                        <Text style={{
+                            color: colors.primary,
+                            fontWeight: 'normal',
+                            fontSize: 15,
+                        }}>{((detailPost.address).length > 50) ? (((detailPost.address).substring(0, 50 - 3)) + '...') : detailPost.address}</Text>
+                        <Text style={{
+                            color: colors.primaryHome,
+                            fontWeight: 'bold',
+                            fontSize: 25,
+                            marginTop: 10,
+                            marginBottom: 5
+                        }}>Details</Text>
+                        <Text style={{
+                            color: colors.primary,
+                            fontWeight: 'normal',
+                            fontSize: 12,
+                        }}>{item.description}</Text>
+                    </ScrollView>
                 </View>
                 <View style={{
                     flex: 10,

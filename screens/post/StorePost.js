@@ -231,9 +231,9 @@ function StorePost(props) {
                     <TextTitle title={'Diện tích và Giá thuê'}/>
                     <View style={styles.containerForm}>
                         <InputField label={'Diện tích (m2)'} icon={'square'} valueInput={area} onChange={setArea}
-                                    keyboardType={'number'}/>
+                                    keyboardType={'numeric'}/>
                         <InputField label={'Giá thuê (VNĐ)'} icon={'dollar'} valueInput={price} onChange={setPrice}
-                                    keyboardType={'number'}/>
+                                    keyboardType={'numeric'}/>
                     </View>
                     <TextTitle title={'Tiêu đề và Mô tả'}/>
                     <View style={styles.containerForm}>
