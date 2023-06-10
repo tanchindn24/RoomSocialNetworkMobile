@@ -49,6 +49,10 @@ function StorePost(props) {
         }
     };
 
+    useEffect(()=>{
+        getUserToken().then(r => r)
+    }, [])
+
     const selectFile = () => {
         const options = {
             mediaType: 'photo',
@@ -113,7 +117,7 @@ function StorePost(props) {
     //const convertedImages = convertDataToImages(images);
 
     const validate = () => {
-        if (!address || !images.length || !area || !title || !description) {
+        if (!address || !price || !images.length || !area || !title || !description) {
             Alert.alert('Error', 'Vui lòng nhập đầy đủ thông tin');
             return false;
         }
@@ -146,10 +150,10 @@ function StorePost(props) {
 
     const postStore = async () => {
         setIsLoading(true)
-        if (true) {
-            const token = await getUserToken();
+        if (validate) {
+            //const token = await getUserToken();
             const headers = {
-                Authorization: `Bearer ${token}`, 'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${userToken}`, 'Content-Type': 'multipart/form-data',
             };
 
             try {
@@ -227,16 +231,16 @@ function StorePost(props) {
                     <TextTitle title={'Diện tích và Giá thuê'}/>
                     <View style={styles.containerForm}>
                         <InputField label={'Diện tích (m2)'} icon={'square'} valueInput={area} onChange={setArea}
-                                    inputType={'number'}/>
-                        <InputField label={'Giá thuê (VNĐ)'} icon={'square'} valueInput={price} onChange={setPrice}
-                                    inputType={'number'}/>
+                                    keyboardType={'number'}/>
+                        <InputField label={'Giá thuê (VNĐ)'} icon={'dollar'} valueInput={price} onChange={setPrice}
+                                    keyboardType={'number'}/>
                     </View>
                     <TextTitle title={'Tiêu đề và Mô tả'}/>
                     <View style={styles.containerForm}>
                         <InputField label={'Tiêu đề'} icon={'font'} valueInput={title} onChange={setTitle}
                                     inputType={'text'}/>
                         <InputField label={'Mô tả'} icon={'reorder'} valueInput={description}
-                                    onChange={setDescription} inputType={'text'}/>
+                                    onChange={setDescription} inputType={'description'}/>
                     </View>
                 </View>
             </SafeAreaView>

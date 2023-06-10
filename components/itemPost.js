@@ -46,6 +46,7 @@ function itemPost(props) {
                       horizontal={false}
                       data={posts} renderItem={({item}) => {
                 const convertJsonImages = JSON.parse(item.image);
+                console.log(convertJsonImages[0])
                 return (
                     <TouchableOpacity
                         onPress={() => {
@@ -66,7 +67,9 @@ function itemPost(props) {
                                 resizeMode: 'cover',
                                 borderRadius: 15,
                                 marginBottom: 5,
-                            }} source={{uri: `${host}/upload/posts/images/${convertJsonImages[0]}`}}/>
+                            }} source={{uri: convertJsonImages[0]}}
+                                //source={{uri: `${host}/upload/posts/images/${convertJsonImages[0]}`}}
+                            />
                             <View style={{
                                 flex: 30,
                                 flexDirection: 'row',

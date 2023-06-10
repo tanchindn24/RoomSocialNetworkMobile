@@ -7,6 +7,7 @@ import {getApi} from "../routes";
 import {colors} from "../constans";
 import PostCard from "../components/PostCard";
 import axios from "axios";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 function Profile(props) {
 
@@ -41,6 +42,12 @@ function Profile(props) {
             getPosts();
         }
     }, [isTokenAvailable]);
+
+    const listenCallGetPost = (eventCallGetPost) => {
+        if (eventCallGetPost === true) {
+            getPosts().then(r => r)
+        }
+    }
 
     const getUserToken = async () => {
         try {
@@ -118,9 +125,19 @@ function Profile(props) {
             <ScrollView style={styles.container}
                         contentContainerStyle={{justifyContent: 'center', alignItems: 'center'}}
                         showsVerticalScrollIndicator={false}>
-                <Image source={{uri: `${host}/upload/avatar/${userInfo && JSON.parse(userInfo)?.data?.avatar}`}}
-                       style={styles.userImg}
-                />
+                <View style={{width: '100%',flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <TouchableOpacity onPress={()=>navigate('Home')}>
+                        <Icon
+                            name={'arrow-circle-left'}
+                            size={25}
+                            color={colors.primaryHome}
+                        />
+                    </TouchableOpacity>
+                    <Image source={{uri: `${host}/upload/avatar/${userInfo && JSON.parse(userInfo)?.data?.avatar}`}}
+                           style={styles.userImg}
+                    />
+                    <View/>
+                </View>
                 <Text style={styles.userName}>{userInfo && JSON.parse(userInfo)?.data?.name}</Text>
                 <Text
                     style={styles.aboutUser}>{userInfo && JSON.parse(userInfo)?.data?.roles === 2 ? "Chủ trọ" : "Khách thuê"}</Text>
@@ -162,7 +179,9 @@ function Profile(props) {
                         <ActivityIndicator size={"large"}/>
                     ) : (
                         postsByUser.map((item) => (
-                            <PostCard key={item.id} item={item}/>
+                            <PostCard key={item.id} props={props} item={item} userToken={userToken}
+                                      triggerCallGetPost={listenCallGetPost}
+                            />
                         ))
                     )
                 }

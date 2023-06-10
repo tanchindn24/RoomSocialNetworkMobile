@@ -3,12 +3,68 @@ import {colors, images} from "../constans";
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { formatTime } from "../utils/utils";
 import {getApi} from "../routes";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useEffect, useState} from "react";
+import axios from "axios";
+import header from "react-navigation-stack/src/vendor/views/Header/Header";
 
-function PostCard({item}) {
+function PostCard({props, item, userToken, triggerCallGetPost}) {
+
+    const {navigation} = props
+    const {navigate} = navigation
 
     const host = `${getApi.host}:${getApi.port}`;
+    const api = '/api';
+    const hidePostEndPoint = '/hide-post';
+    const showPostEndPoint = '/show-post';
+    const deletePostEndPoint = '/delete-post';
 
     const convertJsonImages = item && JSON.parse(item.image);
+
+    const hidePost = async (idPost) => {
+        try {
+            const responseHidePost = await axios.put(host+api+hidePostEndPoint+`/${idPost}`, null, {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            });
+            const { data } = responseHidePost.data
+            triggerCallGetPost(true);
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const showPost = async (idPost) => {
+        try {
+            const responseHidePost = await axios.put(host+api+showPostEndPoint+`/${idPost}`, null, {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            });
+            const { data } = responseHidePost.data
+            triggerCallGetPost(true);
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const deletePost = async (idPost) => {
+        try {
+            const responseHidePost = await axios.delete(host+api+deletePostEndPoint+`/${idPost}`, {
+                headers: {
+                    Authorization: `Bearer ${userToken}`
+                }
+            });
+            const { data } = responseHidePost.data
+            triggerCallGetPost(true);
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     return (
         <View key={item.id} style={styles.card}>
@@ -24,21 +80,34 @@ function PostCard({item}) {
                 </View>
             </View>
             <Text style={styles.PostText}>{((item.title).length > 50) ? (((item.title).substring(0, 50 - 3)) + '...') : item.title}</Text>
-            <Image source={{uri: `${host}/upload/posts/images/${convertJsonImages[0]}`}}
+            <Image source={{uri: convertJsonImages[0]}}
                    style={styles.PostImg}
             />
             <View style={styles.InteractionWrapper}>
-                <TouchableOpacity style={styles.Interaction}>
-                    <Icon name={'eye-slash'} size={25} color={colors.Warning}/>
-                    <Text style={styles.InteractionText}>Ẩn tin</Text>
-                    {/*<Icon name={'eye'} size={25} color={colors.primary}/>*/}
-                    {/*<Text style={styles.InteractionText}>Show</Text>*/}
-                </TouchableOpacity>
-                <TouchableOpacity style={styles.Interaction}>
+                {item.status === 2 ? (
+                        <TouchableOpacity style={styles.Interaction}
+                                          onPress={() => showPost(item.id)}
+                        >
+                            <Icon name={'eye'} size={25} color={colors.primary}/>
+                            <Text style={styles.InteractionText}>Hiển thị</Text>
+                        </TouchableOpacity>
+                    ) : (
+                        <TouchableOpacity style={styles.Interaction}
+                                          onPress={() => hidePost(item.id)}
+                        >
+                            <Icon name={'eye-slash'} size={25} color={colors.Warning}/>
+                            <Text style={styles.InteractionText}>Ẩn</Text>
+                        </TouchableOpacity>
+                    )}
+                <TouchableOpacity style={styles.Interaction}
+                                  onPress={() => navigate('UpdatePost', {itemPost: item, userToken: userToken})}
+                >
                     <Icon name={'edit'} size={25} color={colors.Info}/>
                     <Text style={styles.InteractionText}>Thay đổi</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.Interaction}>
+                <TouchableOpacity style={styles.Interaction}
+                                  onPress={() => deletePost(item.id)}
+                >
                     <Icon name={'trash-o'} size={25} color={colors.danger}/>
                     <Text style={styles.InteractionText}>Xóa</Text>
                 </TouchableOpacity>

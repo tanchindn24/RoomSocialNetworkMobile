@@ -69,14 +69,14 @@ function SearchKeyword(props) {
         } else {
             const lowercaseSearchPosts = searchPosts.toLowerCase();
             const result = dataPosts.filter(item => {
-                const lowercaseAddress = item.address.toLowerCase();
+                //const lowercaseAddress = item.address.toLowerCase();
                 const lowercaseUser = item.user.toLowerCase();
-                const lowercaseCategory = item.category.toLowerCase();
+                //const lowercaseCategory = item.category.toLowerCase();
+                const lowercasePrice = item.category.toLowerCase();
 
                 return (
-                    lowercaseAddress.includes(lowercaseSearchPosts) ||
-                    lowercaseUser.includes(lowercaseSearchPosts) ||
-                    lowercaseCategory.includes(lowercaseSearchPosts)
+                    lowercasePrice.includes(lowercaseSearchPosts) ||
+                    lowercaseUser.includes(lowercaseSearchPosts)
                 );
             });
 
@@ -279,7 +279,7 @@ function SearchKeyword(props) {
                                                   }}
                                 >
                                     <View style={styles.postsSearch}>
-                                        <Image source={{uri: `${host}/upload/posts/images/${convertJsonImages[0]}`}}
+                                        <Image source={{uri: convertJsonImages[0]}}
                                                style={styles.imagePosts}/>
                                         <View style={styles.informationPosts}>
                                             <Text style={styles.userNamePosts}>{item.user}</Text>
